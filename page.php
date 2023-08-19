@@ -20,8 +20,10 @@ get_header(); ?>
 <div class="wrap">
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
-<h1>page.php</h1>
-<h2><?php echo(get_permalink()); ?><h2>
+		<?php if(debug_mode()){ ?>
+			<h1>page.php</h1>
+			<h2><?php echo(get_permalink()); ?><h2>
+		<?php } ?>
 			<?php
 			while ( have_posts() ) :
 				the_post();

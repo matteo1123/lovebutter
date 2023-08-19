@@ -1,12 +1,12 @@
 <?php
 /**
- * LoveButter functions and definitions
+ * Twenty Seventeen functions and definitions
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
  * @package WordPress
- * @subpackage Love_Butter
- * @since Twenty Twenty three 1.0
+ * @subpackage Twenty_Seventeen
+ * @since Twenty Seventeen 1.0
  */
 
 /**
@@ -892,7 +892,7 @@ function payment($data) {
 	error_log($amount);
 	$YOUR_DOMAIN = get_site_url();
 
-	\Stripe\Stripe::setApiKey(get_field('private_key', 90));
+	\Stripe\Stripe::setApiKey(get_field('private_key', 18));
 	try{
 	$checkout_session = \Stripe\Checkout\Session::create([
 		'payment_method_types' => ['card'],
@@ -924,7 +924,7 @@ function payment($data) {
 }
 
 define('__ROOT__', dirname(dirname(__FILE__)));
-require_once(__ROOT__.'/twentyseventeen/stripe/stripe-php/init.php');
+require_once(__ROOT__.'/lovebutter/stripe/stripe-php/init.php');
 
 add_action('rest_api_init', 'purchasedRoutes');
 function purchasedRoutes() {
@@ -935,8 +935,8 @@ function purchasedRoutes() {
 }
 // capture stripe webhooks for both subscriptions and course purchases
 function purchased($data) {
-	\Stripe\Stripe::setApiKey(get_field('private_key', 90));
-	$endpoint_secret = get_field('endpoint_secret', 90);
+	\Stripe\Stripe::setApiKey(get_field('private_key', 18));
+	$endpoint_secret = get_field('endpoint_secret', 18);
 	$payload = @file_get_contents('php://input');
 	$sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
 	$event = null;
@@ -1031,3 +1031,6 @@ function award_ownership($data) {
 	}
 }
 
+function debug_mode() {
+	return false;	
+}
